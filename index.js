@@ -62,8 +62,8 @@ $(document).ready(function() {
 
   assetEvent.watch(function(error, result){
     if (!error){
-        console.log(result);
-        alert("Step " + result + " is complete!");
+        console.log("no error");
+        console.log("Event result:",result);
     } else {
         console.log(error);
     }
