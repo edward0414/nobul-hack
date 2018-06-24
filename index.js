@@ -52,13 +52,28 @@ function checkAllDone() {
       return false;
     }
   } 
-  
-  document.getElementById("done").style.visibility="visible"; 
+  var doneElem = document.getElementById("done")
+  if (doneElem) {
+    doneElem.style.visibility="visible"; 
+  } 
   return true;
 }
+var assetEvent = contractInstance.AssetAdded();
+
+assetEvent.watch(function(error, result){
+  if (!error){
+      console.log("no error");
+      alert("Event result:" + result);
+  } else {
+      console.log(error);
+  }
+})
 
 $(document).ready(function() {
-  document.getElementById("done").style.visibility="hidden"; 
+  var doneElem = document.getElementById("done")
+  if (doneElem) {
+    doneElem.style.visibility="hidden"; 
+  } 
   assetNames = Object.keys(assets);
   for (var i = 0; i < assetNames.length; i++) {
     let name = assetNames[i];
@@ -72,14 +87,5 @@ $(document).ready(function() {
     $("#" + assets[name]).html(isComplete);
     checkAllDone();
   }
-  var assetEvent = contractInstance.AssetAdded();
 
-  assetEvent.watch(function(error, result){
-    if (!error){
-        console.log("no error");
-        console.log("Event result:",result);
-    } else {
-        console.log(error);
-    }
-  })
 });
