@@ -1,0 +1,5 @@
+#go_to_status {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) 
+}
