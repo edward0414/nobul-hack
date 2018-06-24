@@ -2,9 +2,9 @@ web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"AssetList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"assetInventory","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"Asset","type":"bytes32"}],"name":"totalByAsset","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"Asset","type":"bytes32"}],"name":"addAssetToInventory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"Asset","type":"bytes32"}],"name":"validAsset","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"AssetNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"asset","type":"bytes32"},{"indexed":false,"name":"assetCount","type":"uint8"}],"name":"AssetAdded","type":"event"}]');
 AssetTrackerContract = web3.eth.contract(abi);
 // In your nodejs AssetTrackerContract, execute contractInstance.address to get the address at which the contract is deployed and change the line below to use your deployed address
-contractInstance = AssetTrackerContract.at('0xf0c41cb24d8f3531c274ad0a685cd937f4627a18');
+contractInstance = AssetTrackerContract.at('0x1ff8fbc91d1226abeaa507663db99cf80270dffa');
 assets = {"Waivers": "asset-1", "Conditions": "asset-2", "Legal": "asset-3", "Money": "asset-4"}
-
+isCompleteArray = [false, false, false, false];
 //deployedContract = AssetTrackerContract.new(['Waivers', 'Conditions', 'Legal', 'Money'], {data: byteCode, from:web3.eth.accounts[0], gas:4700000})
 // ['Waivers', 'Conditions', 'Legal', 'Money']
 function addAssetToInventory() {
@@ -45,8 +45,20 @@ function addLegal() {
   });
 }
 
+function checkAllDone() {
+  var allDone = true;
+  for (i= 0; i < isCompleteArray.length; i++){
+    if (!isCompleteArray[i]) {
+      return false;
+    }
+  } 
+  
+  document.getElementById("done").style.visibility="visible"; 
+  return true;
+}
 
 $(document).ready(function() {
+  document.getElementById("done").style.visibility="hidden"; 
   assetNames = Object.keys(assets);
   for (var i = 0; i < assetNames.length; i++) {
     let name = assetNames[i];
@@ -56,7 +68,9 @@ $(document).ready(function() {
     if (val > 0) {
       isComplete = "true";
     }
+    isCompleteArray[i] = val > 0;
     $("#" + assets[name]).html(isComplete);
+    checkAllDone();
   }
   var assetEvent = contractInstance.AssetAdded();
 
