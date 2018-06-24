@@ -1,17 +1,13 @@
 Web3 = require('web3')
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-code = fs.readFileSync('Voting.sol').toString()
+code = fs.readFileSync('AssetTracker.sol').toString()
 solc = require('solc')
 compiledCode = solc.compile(code)
-abiDefinition = JSON.parse(compiledCode.contracts[':Voting'].interface)
-VotingContract = web3.eth.contract(abiDefinition)
-byteCode = compiledCode.contracts[':Voting'].bytecode
-deployedContract = VotingContract.new(['Rama','Nick','Jose'],{data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
-contractInstance = VotingContract.at(deployedContract.address)
-
-// contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
-// contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
-// contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+abiDefinition = JSON.parse(compiledCode.contracts[':AssetTracker'].interface)
+AssetTrackerContract = web3.eth.contract(abiDefinition)
+byteCode = compiledCode.contracts[':AssetTracker'].bytecode
+deployedContract = AssetTrackerContract.new(['Waivers', 'Conditions', 'Legal', 'Money'], {data: byteCode, from:web3.eth.accounts[0], gas:4700000})
+contractInstance = AssetTrackerContract.at(deployedContract.address)
 
 console.log("address:");
 console.log(deployedContract.address);
