@@ -4,7 +4,8 @@ AssetTrackerContract = web3.eth.contract(abi);
 // In your nodejs AssetTrackerContract, execute contractInstance.address to get the address at which the contract is deployed and change the line below to use your deployed address
 contractInstance = AssetTrackerContract.at('0xe9466500af387bf1e453a71cd099127003f072d0');
 assets = {"Waivers": "asset-1", "Conditions": "asset-2", "Legal": "asset-3", "Money": "asset-4"}
-
+assetsArray = ['Waivers', 'Conditions', 'Legal', 'Money'];
+isCompleteArray = [false, false, false, false];
 //deployedContract = AssetTrackerContract.new(['Waivers', 'Conditions', 'Legal', 'Money'], {data: byteCode, from:web3.eth.accounts[0], gas:4700000})
 // ['Waivers', 'Conditions', 'Legal', 'Money']
 function addAssetToInventory() {
@@ -45,8 +46,40 @@ function addLegal() {
   });
 }
 
+function checkAllDone() {
+  var allDone = true;
+  for (i= 0; i < isCompleteArray.length; i++){
+    if (!isCompleteArray[i]) {
+      return false;
+    }
+  } 
+  var doneElem = document.getElementById("done");
+  if (doneElem) {
+    doneElem.style.visibility="visible"; 
+  } 
+  return true;
+}
+var assetEvent = contractInstance.AssetAdded();
+
+assetEvent.watch(function(error, result){
+  var doneElem = document.getElementById("done");
+
+  if (!error && doneElem){
+      console.log(result);
+      var index = result.args.assetCount.c[0] + 1;
+      var assetType = assetsArray[index];
+ 
+      alert("Progress made on your home purchase, please check your account");
+  } else {
+      console.log(error);
+  }
+})
 
 $(document).ready(function() {
+  var doneElem = document.getElementById("done");
+  if (doneElem) {
+    doneElem.style.visibility="hidden"; 
+  } 
   assetNames = Object.keys(assets);
   for (var i = 0; i < assetNames.length; i++) {
     let name = assetNames[i];
@@ -56,16 +89,9 @@ $(document).ready(function() {
     if (val > 0) {
       isComplete = "true";
     }
+    isCompleteArray[i] = val > 0;
     $("#" + assets[name]).html(isComplete);
+    checkAllDone();
   }
-  var assetEvent = contractInstance.AssetAdded();
 
-  assetEvent.watch(function(error, result){
-    if (!error){
-        console.log("no error");
-        console.log("Event result:",result);
-    } else {
-        console.log(error);
-    }
-  })
 });
