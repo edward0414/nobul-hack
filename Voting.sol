@@ -6,7 +6,8 @@ contract Voting {
   The key of the mapping is candidate name stored as type bytes32 and value is
   an unsigned integer to store the vote count
   */
-  
+  event VoteAdded(bytes32 candidate, uint8 voteNum);
+
   mapping (bytes32 => uint8) public votesReceived;
   
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
@@ -34,6 +35,7 @@ contract Voting {
   function voteForCandidate(bytes32 candidate) public {
     require(validCandidate(candidate));
     votesReceived[candidate] += 1;
+    VoteAdded(candidate, votesReceived[candidate]);
   }
 
   function validCandidate(bytes32 candidate) view public returns (bool) {
