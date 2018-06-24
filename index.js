@@ -62,12 +62,14 @@ function checkAllDone() {
 var assetEvent = contractInstance.AssetAdded();
 
 assetEvent.watch(function(error, result){
-  if (!error){
+  var doneElem = document.getElementById("done");
+
+  if (!error && doneElem){
       console.log(result);
       var index = result.args.assetCount.c[0] + 1;
       var assetType = assetsArray[index];
-
-      alert("An update was made to your home purchase, please check your account");
+ 
+      alert("Progress made on your home purchase, please check your account");
   } else {
       console.log(error);
   }
