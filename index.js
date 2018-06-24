@@ -25,6 +25,7 @@ $(document).ready(function() {
   voteEvent.watch(function(error, result){
     if (!error){
         console.log("no error");
+        console.log("result:",result);
     } else {
         console.log(error);
     }
