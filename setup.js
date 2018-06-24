@@ -7,9 +7,11 @@ abiDefinition = JSON.parse(compiledCode.contracts[':Voting'].interface)
 VotingContract = web3.eth.contract(abiDefinition)
 byteCode = compiledCode.contracts[':Voting'].bytecode
 deployedContract = VotingContract.new(['Rama','Nick','Jose'],{data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
-deployedContract.address
 contractInstance = VotingContract.at(deployedContract.address)
 
-contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
-contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
-contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+// contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+// contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+// contractInstance.voteForCandidate('Rama', {from: web3.eth.accounts[0]})
+
+console.log("address:");
+console.log(deployedContract.address);
