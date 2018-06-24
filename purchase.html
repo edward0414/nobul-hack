@@ -4,13 +4,32 @@
   <title>Hello World DApp</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
-<body class="container">
-  <h1>My Home Purchase</h1>
-<img src="img/map.png"/> 
+<body>
+    <nav id="header" class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+            </a>
+          </div>
+        </div>
+      </nav>
+  <div class="container">
+      <div style="display:flex; flex-direction:column;">
+          <h1>My Home Purchase</h1>
+          <h3>Picture</h3>
+          <img width="600" height="auto" src="img/house.jpg"/>
+          <h3>Location</h3>
+          <img width="600" height="auto" src="img/map.png"/>
+      </div>
 <br/>
-    <img src="img/house.jpg"/>
     <br/>
-  <a  href="index.html" class="btn btn-primary">Accept</a>
+    <div id="go_to_status">
+      <a  href="index.html" class="btn btn-primary">Accept</a>
+    </div>
+  </div>
+    
+
 </body>
 </html>

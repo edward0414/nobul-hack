@@ -1,0 +1,14 @@
+#go_to_status {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) 
+}
+
+#map {
+    width: 965px;
+    height: 615px;
+}
+
+#header {
+    width: 100vw;
+}

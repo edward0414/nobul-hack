@@ -4,6 +4,7 @@
   <title>Nobul</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
 <body class="container">
   <h1>Agent Submit</h1>
@@ -18,7 +19,10 @@
  <p>Are all funds in the trust account?</p>
  <a href="#" onclick="addMoney()" class="btn btn-primary">Confirm</a>
 
- <a href="index.html" class="btn btn-primary">Go To Status</a>
+ <div id="go_to_status">
+  <a href="index.html" class="btn btn-primary">Go To Status</a>
+ </div>
+ 
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
