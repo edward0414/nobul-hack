@@ -6,9 +6,9 @@ contract AssetTracker {
   The key of the mapping is Asset name stored as type bytes32 and value is
   an unsigned integer to store the vote count
   */
-  event AssetAdded(bytes32 asset, uint8 assetCount);
+  event AssetAdded(bytes32 asset, bool assetCount);
 
-  mapping (bytes32 => uint8) public assetInventory;
+  mapping (bytes32 => bool) public assetInventory;
   
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
   We will use an array of bytes32 instead to store the list of Assets
@@ -25,7 +25,7 @@ contract AssetTracker {
   }
 
   // This function returns the total votes a Asset has received so far
-  function totalByAsset(bytes32 Asset) view public returns (uint8) {
+  function totalByAsset(bytes32 Asset) view public returns (bool) {
     require(validAsset(Asset));
     return assetInventory[Asset];
   }
@@ -34,8 +34,8 @@ contract AssetTracker {
   // is equivalent to casting a vote
   function addAssetToInventory(bytes32 Asset) public {
     require(validAsset(Asset));
-    assetInventory[Asset] += 1;
-    AssetAdded(Asset, assetInventory[Asset]);
+    assetInventory[Asset] = true;
+    emit AssetAdded(Asset, assetInventory[Asset]);
   }
 
   function validAsset(bytes32 Asset) view public returns (bool) {
