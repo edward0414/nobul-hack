@@ -5,45 +5,55 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 </head>
-<body class="container">
-  <h1>Home Purchase Status</h1>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Waivers</td>
-          <td id="asset-1"></td>
-        </tr>
-        <tr>
-          <td>Conditions</td>
-          <td id="asset-2"></td>
-        </tr>
-        <tr>
-          <td>Legal</td>
-          <td id="asset-3"></td>
-        </tr>
-        <tr>
-          <td>Money</td>
-          <td id="asset-4"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
- 
-  <div id="done">
+<body>
+    <nav id="header" class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              <img width="100" height="auto" src="img/nobullogo.svg" />
+            </a>
+        </div>
+      </nav>
+  <div class="container">
+      <h1>Home Purchase Status</h1>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Waivers</td>
+              <td id="asset-1"></td>
+            </tr>
+            <tr>
+              <td>Conditions</td>
+              <td id="asset-2"></td>
+            </tr>
+            <tr>
+              <td>Legal</td>
+              <td id="asset-3"></td>
+            </tr>
+            <tr>
+              <td>Money</td>
+              <td id="asset-4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     
- <h1>Your Purchase is Complete </h1>
- <br/>
-
- <a href="timing.html" class="btn btn-primary">Check Timing</a>
-</div>
+     
+      <div id="done">
+        
+     <h1>Your Purchase is Complete </h1>
+     <br/>
+    
+     <a href="timing.html" class="btn btn-primary">Check Timing</a>
+    </div>
+  </div>    
   
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
